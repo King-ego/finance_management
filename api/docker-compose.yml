@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgis/postgis:17-3.4
+    container_name: postgres
+    environment:
+      POSTGRES_USER: diego
+      POSTGRES_PASSWORD: xpKk5sbJVUyWB6eLACh
+      POSTGRES_DB: finance_management
+    ports:
+      - "25432:5432"
+  finance-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3055:3055" # Porta do servidor NestJS
+    volumes:
+      - .:/usr/src/app # Monta o código local no contêiner
+      - /usr/src/app/node_modules # Protege o diretório node_modules do contêiner
