@@ -1,8 +1,8 @@
 version: '3.8'
 services:
-  postgres:
+  postgres_db:
     image: postgis/postgis:17-3.4
-    container_name: postgres
+    container_name: postgres_db
     environment:
       POSTGRES_USER: diego
       POSTGRES_PASSWORD: xpKk5sbJVUyWB6eLACh
