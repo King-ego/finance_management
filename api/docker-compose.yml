@@ -17,4 +17,4 @@ services:
       - "3055:3055" # Porta do servidor NestJS
     volumes:
       - .:/usr/src/app # Monta o código local no contêiner
-      - /usr/src/app/node_modules # Protege o diretório node_modules do contêiner
+      #- /usr/src/app/node_modules # Protege o diretório node_modules do contêiner
