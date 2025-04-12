@@ -12,7 +12,11 @@ export class CreateUsersService {
     constructor(private readonly usersRepository: UsersRepository) {
     }
 
-    public async execute(_: ICreateUser): Promise<void> {
+    public async execute(data: ICreateUser): Promise<void> {
+        const { name, account_balance, email } = data;
+        await this.usersRepository.createUser({
+            name, email
+        })
         console.log("old");
     }
 }
