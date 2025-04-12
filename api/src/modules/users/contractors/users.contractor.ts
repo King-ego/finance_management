@@ -1,5 +1,5 @@
-import { ICreateUser } from "./users.contractor.type";
+import * as UsersTypes from "./users.contractor.type";
 
 export default interface UsersContractor {
-    createUser(_: ICreateUser): Promise<void>;
+    createUser(_: UsersTypes.ICreateUser): Promise<void>;
 }

@@ -1,7 +1,10 @@
-import { PrismaClient as PostgresClient } from '../../../../prisma/generated/postgreClient';
+import { PrismaClient as PostgresClient } from "../../../../prisma/generated/postgreClient";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 class PrismaOrm {
-    private readonly postgresClient: PostgresClient
+    private readonly postgresClient: PostgresClient;
+
     constructor() {
         this.postgresClient = new PostgresClient();
     }
@@ -11,6 +14,6 @@ class PrismaOrm {
     }
 }
 
-export { PostgresClient }
+export { PostgresClient };
 
 export default PrismaOrm;
