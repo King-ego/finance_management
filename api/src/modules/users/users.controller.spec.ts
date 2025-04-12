@@ -13,7 +13,7 @@ describe('UsersController', () => {
   });
 
   it('should be defined create user', () => {
-    const create =  controller.create({name: 'test', account_balance: 2000.12})
-    expect(create).toBe("test");
+    const create =  controller.create({name: 'test', account_balance: 2000.12, email: "diego@gmail.com"})
+    expect(create).toBe("Usuario criado com sucesso");
   });
 });
