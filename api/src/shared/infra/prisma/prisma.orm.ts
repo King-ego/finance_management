@@ -1,4 +1,4 @@
-import { PrismaClient as PostgresClient } from '../../../../prisma/generated/client';
+import { PrismaClient as PostgresClient } from '../../../../prisma/generated/postgreClient';
 
 class PrismaOrm {
     private readonly postgresClient: PostgresClient
