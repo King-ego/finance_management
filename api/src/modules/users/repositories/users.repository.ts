@@ -1,16 +1,15 @@
 import { Injectable } from "@nestjs/common";
 
 import UsersContractor from "../contractors/users.contractor";
-import PrismaOrm, {PostgresClient} from "../../../shared/infra/prisma/prisma.orm";
+import PrismaOrm, { PostgresClient } from "../../../shared/infra/prisma/prisma.orm";
 import * as UsersTypes from "../contractors/users.contractor.type";
 
 @Injectable()
 class UsersRepository implements UsersContractor {
-    private readonly ormPrisma: PostgresClient
+    private readonly ormPrisma: PostgresClient;
 
-    constructor(
-    ) {
-        this.ormPrisma = new PrismaOrm().prismaPostgres()
+    constructor() {
+        this.ormPrisma = new PrismaOrm().prismaPostgres();
     }
 
     public async createUser(data: UsersTypes.ICreateUser): Promise<void> {

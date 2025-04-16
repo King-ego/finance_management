@@ -15,7 +15,7 @@ export class CreateUsersService {
     public async execute(data: ICreateUser): Promise<void> {
         const { name, account_balance, email } = data;
         await this.usersRepository.createUser({
-            name, email
+            name, email, created_by: "8c56153a-49ee-4932-95b1-fef6648ecd20"
         })
         console.log("old");
     }

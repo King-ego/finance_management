@@ -20,6 +20,20 @@ model User {
   email      String   @unique
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  created_by String   @db.Uuid
+  updated_by String?  @db.Uuid
 
   @@map("users")
+}
+
+model Account {
+  id         String   @id @default(uuid()) @db.Uuid
+  user_id    String   @db.Uuid
+  value      Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  created_by String   @db.Uuid
+  updated_by String?  @db.Uuid
+
+  @@map("accounts")
 }
