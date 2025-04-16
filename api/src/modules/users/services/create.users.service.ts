@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import UsersRepository from "../repositories/users.repository";
+import { randomUUID } from "crypto";
 
 interface ICreateUser {
     name: string;
@@ -14,8 +15,9 @@ export class CreateUsersService {
 
     public async execute(data: ICreateUser): Promise<void> {
         const { name, account_balance, email } = data;
+        const id = randomUUID();
         await this.usersRepository.createUser({
-            name, email, created_by: "8c56153a-49ee-4932-95b1-fef6648ecd20"
+            name, email, created_by: id, id
         })
         console.log("old");
     }
