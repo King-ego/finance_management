@@ -1,11 +1,8 @@
-import { IsEmail, IsString, IsNumber } from "class-validator";
+import { IsEmail, IsString } from "class-validator";
 
 export default class CreateUsersInput {
     @IsString()
     name: string;
-
-    @IsNumber()
-    account_balance: number;
 
     @IsString()
     @IsEmail()

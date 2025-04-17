@@ -1,5 +1,6 @@
 export interface ICreateTransaction {
     value: number;
-    account_id: string;
+    sender_account_id: string;
+    receiver_account_id: string;
     created_by: string;
 }

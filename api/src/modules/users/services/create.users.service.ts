@@ -7,7 +7,6 @@ import { CustomerException } from "../../../shared/errors/customerExceptions";
 interface ICreateUser {
     name: string;
     email: string;
-    account_balance: number;
 }
 
 @Injectable()
@@ -18,7 +17,7 @@ export class CreateUsersService {
     ) {}
 
     public async execute(data: ICreateUser): Promise<void> {
-        const { name, account_balance, email } = data;
+        const { name, email } = data;
         const existingUser = await this.usersRepository.findUserByFilter({
             email,
         });
@@ -35,7 +34,7 @@ export class CreateUsersService {
             id,
         });
         await this.accountsRepository.createAccount({
-            value: account_balance,
+            value: 0,
             created_by: id,
             user_id: id,
         });
