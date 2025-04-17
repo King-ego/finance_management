@@ -5,11 +5,9 @@ export interface ICreateUser {
     id: string;
 }
 
-export  interface IFindUserByFilter {
+export interface IFindUserByFilter {
     name?: string;
     email?: string;
     created_by?: string;
     id?: string;
 }
-
-

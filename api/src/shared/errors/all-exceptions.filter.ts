@@ -4,9 +4,9 @@ import {
     ArgumentsHost,
     HttpException,
     HttpStatus,
-} from '@nestjs/common';
-import { Response } from 'express';
-import { CustomerException } from './customerExceptions';
+} from "@nestjs/common";
+import { Response } from "express";
+import { CustomerException } from "./customerExceptions";
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -15,12 +15,13 @@ export class AllExceptionsFilter implements ExceptionFilter {
         const response = ctx.getResponse<Response>();
 
         let status = HttpStatus.INTERNAL_SERVER_ERROR;
-        let message = 'Erro interno do servidor';
+        let message = "Erro interno do servidor";
 
         if (exception instanceof HttpException) {
             status = exception.getStatus();
             const res = exception.getResponse();
-            message = typeof res === 'string' ? res : (res as any).message;
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
+            message = typeof res === "string" ? res : (res as any).message;
         } else if (exception instanceof Error) {
             message = exception.message;
         }
@@ -29,14 +30,14 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
         const errorResponse = customException.getResponse();
         const safeResponse =
-            typeof errorResponse === 'object'
+            typeof errorResponse === "object"
                 ? errorResponse
                 : { message: errorResponse };
 
         response.status(status).json({
             ...safeResponse,
             timestamp: new Date().toISOString(),
-            status
+            status,
         });
     }
 }

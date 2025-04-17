@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
-import { AccountsRepositoryModule } from './repositories/accounts.repository.module';
+import { Module } from "@nestjs/common";
+import { AccountsRepositoryModule } from "./repositories/accounts.repository.module";
 
 @Module({
-  imports: [AccountsRepositoryModule]
+    imports: [AccountsRepositoryModule],
 })
 export class AccountsModule {}
