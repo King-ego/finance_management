@@ -1,6 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import UsersRepository from "../repositories/users.repository";
 import { randomUUID } from "crypto";
+import { AccountsRepositoryModule } from "../../accounts/repositories/accounts.repository.module";
+import AccountsRepository from "../../accounts/repositories/accounts.repository";
 
 interface ICreateUser {
     name: string;
@@ -10,7 +12,10 @@ interface ICreateUser {
 
 @Injectable()
 export class CreateUsersService {
-    constructor(private readonly usersRepository: UsersRepository) {
+    constructor(
+        private readonly usersRepository: UsersRepository,
+        private readonly accountsRepository: AccountsRepository,
+    ) {
     }
 
     public async execute(data: ICreateUser): Promise<void> {
@@ -19,6 +24,11 @@ export class CreateUsersService {
         await this.usersRepository.createUser({
             name, email, created_by: id, id
         })
+        await this.accountsRepository.createAccount({
+            value: account_balance,
+            created_by: id,
+            user_id: id,
+        });
         console.log("old");
     }
 }

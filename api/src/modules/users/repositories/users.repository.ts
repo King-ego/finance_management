@@ -6,14 +6,14 @@ import * as UsersTypes from "../contractors/users.contractor.type";
 
 @Injectable()
 class UsersRepository implements UsersContractor {
-    private readonly ormPrisma: PostgresClient;
+    private readonly prismaOrm: PostgresClient;
 
     constructor() {
-        this.ormPrisma = new PrismaOrm().prismaPostgres();
+        this.prismaOrm = new PrismaOrm().prismaPostgres();
     }
 
     public async createUser(data: UsersTypes.ICreateUser): Promise<void> {
-        await this.ormPrisma.user.create({ data });
+        await this.prismaOrm.user.create({ data });
     }
 }
 
