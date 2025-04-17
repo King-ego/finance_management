@@ -5,7 +5,7 @@ import {
     HttpException,
     HttpStatus,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { CustomerNotFoundException } from './customerExceptions';
 
 @Catch()
@@ -25,10 +25,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
             message = exception.message;
         }
 
-        // Cria a exceção customizada
         const customException = new CustomerNotFoundException(message, status);
 
-        // Garante que o conteúdo do getResponse seja um objeto
         const errorResponse = customException.getResponse();
         const safeResponse =
             typeof errorResponse === 'object'

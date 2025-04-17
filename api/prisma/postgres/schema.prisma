@@ -37,3 +37,15 @@ model Account {
 
   @@map("accounts")
 }
+
+model Transaction {
+  id         String   @id @default(uuid()) @db.Uuid
+  account_id String   @db.Uuid
+  value      Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  created_by String   @db.Uuid
+  updated_by String?  @db.Uuid
+
+  @@map("transactions")
+}
