@@ -1,4 +1,7 @@
 import { Module } from "@nestjs/common";
+import { TransactionsRepositoryModule } from "./repositories/transactions.repository.module";
 
-@Module({})
+@Module({
+    imports: [TransactionsRepositoryModule],
+})
 export class TransactionsModule {}
