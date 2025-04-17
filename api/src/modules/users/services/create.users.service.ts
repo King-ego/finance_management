@@ -15,12 +15,13 @@ export class CreateUsersService {
     constructor(
         private readonly usersRepository: UsersRepository,
         private readonly accountsRepository: AccountsRepository,
-    ) {
-    }
+    ) {}
 
     public async execute(data: ICreateUser): Promise<void> {
         const { name, account_balance, email } = data;
-        const existingUser = await this.usersRepository.findUserByFilter({ email });
+        const existingUser = await this.usersRepository.findUserByFilter({
+            email,
+        });
 
         if (existingUser) {
             throw new CustomerException("User already exists", 404);
@@ -28,8 +29,11 @@ export class CreateUsersService {
 
         const id = randomUUID();
         await this.usersRepository.createUser({
-            name, email, created_by: id, id
-        })
+            name,
+            email,
+            created_by: id,
+            id,
+        });
         await this.accountsRepository.createAccount({
             value: account_balance,
             created_by: id,
