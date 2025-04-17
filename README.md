@@ -33,6 +33,8 @@ Este é um sistema de gestão financeira para monitorar o saldo e registrar tran
    ```sh
     docker compose up --build
    ```
+6. Documentação da API:
+   Acesse a documentação da API em `http://localhost:3000/docs`.
 
 ## Contato
 Para mais informações, entre em contato pelo e-mail: `seuemail@email.com`

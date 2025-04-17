@@ -1,12 +1,14 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsString, IsUUID } from "class-validator";
 
 export default class CreateTransactionsInput {
     @IsNumber()
     value: number;
 
+    @IsUUID()
     @IsString()
-    sender_account_id: string;
+    sender_id: string;
 
+    @IsUUID()
     @IsString()
-    receiver_account_id: string;
+    recipient_id: string;
 }

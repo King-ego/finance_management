@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import TransactionsRepository from "../repositories/transactions.repository";
-import UsersRepository from "../../users/repositories/users.repository";
 import AccountsRepository from "../../accounts/repositories/accounts.repository";
 import { CustomerException } from "../../../shared/errors/customerExceptions";
 
@@ -14,7 +13,6 @@ interface ICreateTransaction {
 export class CreateTransactionsService {
     constructor(
         private readonly transactionsRepository: TransactionsRepository,
-        private readonly usersRepository: UsersRepository,
         private readonly accountsRepository: AccountsRepository,
     ) {}
 
@@ -40,5 +38,18 @@ export class CreateTransactionsService {
         if (senderAccount.value < value) {
             throw new CustomerException("Insufficient funds", 400);
         }
+
+        senderAccount.value -= value;
+        recipientAccount.value += value;
+
+        await this.accountsRepository.saveAccount(senderAccount);
+        await this.accountsRepository.saveAccount(recipientAccount);
+
+        await this.transactionsRepository.createTransaction({
+            created_by: sender_id,
+            value,
+            receiver_account_id: recipientAccount.id,
+            sender_account_id: senderAccount.id,
+        });
     }
 }
