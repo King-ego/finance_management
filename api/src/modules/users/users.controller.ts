@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiTags, ApiBody } from "@nestjs/swagger";
 
 import CreateUsersInput from "./dto/create-users-input";
 import { CreateUsersService } from "./services/create.users.service";
@@ -9,6 +9,7 @@ import { CreateUsersService } from "./services/create.users.service";
 export class UsersController {
     constructor(private readonly createUsersService: CreateUsersService) {}
 
+    @ApiBody({ type: CreateUsersInput })
     @Post("")
     async create(@Body() body: CreateUsersInput) {
         await this.createUsersService.execute(body);
